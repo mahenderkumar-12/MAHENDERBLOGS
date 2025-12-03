@@ -312,6 +312,9 @@
             <select id="categoryFilter" onchange="filterPosts()">
                 <option value="all">All Topics</option>
                 <option value="Travel">Travel</option>
+                <option value="Politics">Politics</option>
+                <option value="International Affairs">International Affairs</option>
+                <option value="Study">Study</option>
                 <option value="Food">Food</option>
                 <option value="Science">Science</option>
                 <option value="Fitness">Fitness</option>
@@ -335,7 +338,8 @@
             <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img">
             <div class="about-text">
                 <h3>About Mahender</h3>
-                <p>Welcome to my personal blog space! I am passionate about technology, coding, and design. Here, I share my thoughts, tutorials, and experiences to help others learn and grow. Thanks for visiting!</p>
+                <!-- UPDATED ABOUT TEXT -->
+                <p>Welcome to my personal blog space! I am passionate about a wide range of topics, including **Travel, Politics, International Affairs, and Study**, alongside my interests in Technology, Food, Science, Fitness, and Music. Here, I share my thoughts and experiences to help others learn and grow. Thanks for visiting!</p>
                 <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">&copy; 2024 Mahender Blogs. All rights reserved.</p>
             </div>
         </div>
@@ -366,11 +370,33 @@
         const blogData = [
             {
                 id: 1,
-                title: "Top 10 Hidden Gems in Europe",
+                title: "VRINDAVAN TRIP",
                 category: "Travel",
-                image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800",
-                excerpt: "Discover the most beautiful secret spots in Europe that tourists often miss...",
-                content: "Discover the most beautiful secret spots in Europe that tourists often miss. From the small villages of Italy to the mountains of Switzerland, this guide takes you off the beaten path."
+                image: "https://i.postimg.cc/pXqhggxb/IMG20230416065543.jpg",
+                excerpt: "An exciting travelogue of my memorable 21km Parikrama trip to Vrindavan with my family.",
+                // FIX: Changed quotes to backticks (template literal) to allow multi-line string content.
+                content: `Hey friends, this is Mahender here.
+                 I am going to tell you my experience when I went to Vrindavan. 
+                 Yeah, seven months ago, I went there for worship and 
+                 I was very happy to hear that we were going there.
+                  So my whole family went there with me. 
+                  Let's start from where we got ready.
+                   I am in Rajasthan, Geejgarh.
+                    We packed all the items that we needed, like stove, cylinder, some fruits and gods' photos.
+                     And then we prayed to God for this happy journey. And then we all sat in a jeep and a tempo.
+                      And the happy thing for me was that I sat on the upper side of the tempo and I enjoyed looking at nature's beauty. 
+                      And after some time, the trees hit those who sat on the tempo. We saved ourselves when the trees tried to hit us. 
+                      Now we were getting late and it was 8 pm and we were still in Rajasthan. 
+                      We didn't cross the Rajasthan border yet. And then we got bored, so I started to sing a Radha Rani song like "Radhe Radhe Bol Vrindavan Me Dhol" and "Mukh Se Radhe Radhe Bol".
+                       We sang that one by one and you know, I was very happy because this day would be memorable for me.
+                        And at 12 am, we reached there. First we washed our hands and mouth and then we sat to eat food that we brought from home.
+                         And then we went to worship Govardhan. And then we started the parikrama of 7 kos which is 21 km.
+                          And this was the most enjoyable part for us. Now everyone was walking for the parikrama. 
+                          I was also walking and there were lots of monkeys. And I saw there were many temples on the way of the parikrama. 
+                          We stopped at every temple and gave 1 or 2 rupees in every donation box. And after a few minutes, I bought some chana and gave it to the monkeys.
+                           And everyone looked happy. Now at 5 am, we reached Radha Kund and there we worshipped Radha. 
+                           And then we continued our parikrama. There were lots of kunds there.
+                            And then we completed our parikrama. More story in the next part.`
             },
             {
                 id: 2,
@@ -402,7 +428,7 @@
         ];
 
         // Helper function to generate 16 more dummy posts for the demo
-        const categories = ["Travel", "Food", "Science", "Fitness", "Music", "Movies", "Nature", "Gaming"];
+        const categories = ["Travel", "Food", "Science", "Fitness", "Music", "Movies", "Nature", "Gaming", "Politics", "International Affairs", "Study"];
         const dummyImages = [
             "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800", // Music
             "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800", // Nature
@@ -485,7 +511,9 @@
             modalTitle.textContent = post.title;
             modalImage.src = post.image;
             modalCategory.textContent = post.category;
-            modalBody.textContent = post.content;
+            // Note: innerHTML is generally safer for content from a trusted source like this JS array.
+            // Using innerHTML here to respect the original multi-line formatting from the template literal.
+            modalBody.innerHTML = post.content.replace(/\n/g, '<br>');
 
             modal.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
