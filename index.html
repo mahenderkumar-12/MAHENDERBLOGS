@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahender Blogs</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+
+        select {
+            background: var(--bg-card);
+            color: white;
+            border: 1px solid var(--border);
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* --- GRID LAYOUT --- */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- BLOG CARD DESIGN --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            border-color: var(--accent);
+        }
+
+        .thumbnail-area {
+            height: 200px;
+            width: 100%;
+            background-color: #2d3748;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thumbnail-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .thumbnail-area img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            width: fit-content;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .card-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            align-self: flex-start;
+        }
+
+        .read-more-btn:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* --- MODAL (POPUP) STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- FOOTER STYLES --- */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .about-text h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .controls {
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            input, select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Search and Filter -->
+    <header>
+        <div class="logo">MAHENDER BLOGS</div>
+        <div class="controls">
+            <select id="categoryFilter" onchange="filterPosts()">
+                <option value="all">All Topics</option>
+                <option value="Travel">Travel</option>
+                <option value="Food">Food</option>
+                <option value="Science">Science</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Music">Music</option>
+                <option value="Tech">Technology</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search blogs..." onkeyup="filterPosts()">
+        </div>
+    </header>
+
+    <!-- Main Grid Container -->
+    <div class="container">
+        <div class="blog-grid" id="blogGrid">
+            <!-- Blog cards will be injected here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img">
+            <div class="about-text">
+                <h3>About Mahender</h3>
+                <p>Welcome to my personal blog space! I am passionate about technology, coding, and design. Here, I share my thoughts, tutorials, and experiences to help others learn and grow. Thanks for visiting!</p>
+                <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">&copy; 2024 Mahender Blogs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Reading Full Content -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img src="" alt="" class="modal-image" id="modalImage">
+            <div class="badge" id="modalCategory">Category</div>
+            <h2 id="modalTitle" style="margin-bottom: 1rem; color: white;">Title</h2>
+            <div id="modalBody" style="color: var(--text-muted); line-height: 1.8;">
+                <!-- Full text goes here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // HOW TO UPLOAD YOUR BLOGS VIA CODE
+        // ==========================================
+        // 1. Find the 'blogData' array below.
+        // 2. Add a new object inside the array.
+        // 3. Format: { id: number, title: "Title", category: "Topic", image: "URL", excerpt: "Short text", content: "Full text" }
+        // ==========================================
+
+        const blogData = [
+            {
+                id: 1,
+                title: "Top 10 Hidden Gems in Europe",
+                category: "Travel",
+                image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800",
+                excerpt: "Discover the most beautiful secret spots in Europe that tourists often miss...",
+                content: "Discover the most beautiful secret spots in Europe that tourists often miss. From the small villages of Italy to the mountains of Switzerland, this guide takes you off the beaten path."
+            },
+            {
+                id: 2,
+                title: "The Art of Making Perfect Pasta",
+                category: "Food",
+                image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80&w=800",
+                excerpt: "Fresh ingredients and simple techniques are all you need for an authentic Italian dinner...",
+                content: "Fresh ingredients and simple techniques are all you need. We explore the history of pasta making, the best flour to use, and how to create the perfect al dente texture every time."
+            },
+            {
+                id: 3,
+                title: "Understanding The Universe: Black Holes",
+                category: "Science",
+                image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800",
+                excerpt: "A deep dive into the mysteries of space, time dilation, and what lies beyond the event horizon...",
+                content: "A deep dive into the mysteries of space. We look at Stephen Hawking's theories, the recent photography of a black hole, and what it means for our understanding of physics."
+            },
+            {
+                id: 4,
+                title: "Morning Yoga for Beginners",
+                category: "Fitness",
+                image: "https://images.unsplash.com/photo-1544367563-121910aa662f?auto=format&fit=crop&q=80&w=800",
+                excerpt: "Start your day with energy and focus. These 5 simple poses will improve flexibility...",
+                content: "Start your day with energy. Yoga isn't just about flexibility; it's about mindfulness. This routine is designed for complete beginners to do in the comfort of their living room."
+            },
+            // Generating the remaining 16 placeholder posts programmatically 
+            // so you have 20 boxes as requested.
+            // You can replace these with real data manually.
+        ];
+
+        // Helper function to generate 16 more dummy posts for the demo
+        const categories = ["Travel", "Food", "Science", "Fitness", "Music", "Movies", "Nature", "Gaming"];
+        const dummyImages = [
+            "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800", // Music
+            "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800", // Nature
+            "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800", // Movies
+            "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800"  // Gaming
+        ];
+
+        for (let i = 5; i <= 20; i++) {
+            const randomCat = categories[Math.floor(Math.random() * categories.length)];
+            const randomImg = dummyImages[Math.floor(Math.random() * dummyImages.length)];
+            
+            blogData.push({
+                id: i,
+                title: `Amazing ${randomCat} Story #${i}`,
+                category: randomCat,
+                image: randomImg,
+                excerpt: `This is a placeholder summary about ${randomCat}. It simulates the space where your intro text will go.`,
+                content: `This is the full content for a post about ${randomCat}. When you edit the code, you will replace this text with your actual article content. You can write as much as you want here about any topic.`
+            });
+        }
+
+        // --- RENDER LOGIC ---
+        const blogGrid = document.getElementById('blogGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+
+        function renderPosts(posts) {
+            blogGrid.innerHTML = ''; // Clear current grid
+
+            if (posts.length === 0) {
+                blogGrid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1/-1; text-align:center;">No posts found.</p>';
+                return;
+            }
+
+            posts.forEach(post => {
+                const card = document.createElement('article');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="thumbnail-area">
+                        <img src="${post.image}" alt="${post.title}" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge">${post.category}</span>
+                        <h3 class="card-title">${post.title}</h3>
+                        <p class="card-excerpt">${post.excerpt}</p>
+                        <button class="read-more-btn" onclick="openModal(${post.id})">Read Article</button>
+                    </div>
+                `;
+                blogGrid.appendChild(card);
+            });
+        }
+
+        // --- FILTERING LOGIC ---
+        function filterPosts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedCategory = categoryFilter.value;
+
+            const filtered = blogData.filter(post => {
+                const matchesSearch = post.title.toLowerCase().includes(searchTerm) || 
+                                      post.excerpt.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
+                
+                return matchesSearch && matchesCategory;
+            });
+
+            renderPosts(filtered);
+        }
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(id) {
+            const post = blogData.find(p => p.id === id);
+            if (!post) return;
+
+            modalTitle.textContent = post.title;
+            modalImage.src = post.image;
+            modalCategory.textContent = post.category;
+            modalBody.textContent = post.content;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal if clicking outside the content box
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Initial Render
+        renderPosts(blogData);
+
+    </script>
+</body>
+</html>
