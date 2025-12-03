@@ -320,6 +320,7 @@
                 <option value="Fitness">Fitness</option>
                 <option value="Music">Music</option>
                 <option value="Tech">Technology</option>
+                <option value="Thoughts">Thoughts</option> 
             </select>
             <input type="text" id="searchInput" placeholder="Search blogs..." onkeyup="filterPosts()">
         </div>
@@ -338,7 +339,6 @@
             <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img">
             <div class="about-text">
                 <h3>About Mahender</h3>
-                <!-- UPDATED ABOUT TEXT -->
                 <p>Welcome to my personal blog space! I am passionate about a wide range of topics, including **Travel, Politics, International Affairs, and Study**, alongside my interests in Technology, Food, Science, Fitness, and Music. Here, I share my thoughts and experiences to help others learn and grow. Thanks for visiting!</p>
                 <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">&copy; 2024 Mahender Blogs. All rights reserved.</p>
             </div>
@@ -362,93 +362,185 @@
         // ==========================================
         // HOW TO UPLOAD YOUR BLOGS VIA CODE
         // ==========================================
-        // 1. Find the 'blogData' array below.
-        // 2. Add a new object inside the array.
-        // 3. Format: { id: number, title: "Title", category: "Topic", image: "URL", excerpt: "Short text", content: "Full text" }
+        // All posts are now explicitly defined below for easy editing.
         // ==========================================
 
         const blogData = [
+            // --- POST 1 (VRINDAVAN TRIP) ---
             {
                 id: 1,
                 title: "VRINDAVAN TRIP",
                 category: "Travel",
                 image: "https://i.postimg.cc/pXqhggxb/IMG20230416065543.jpg",
                 excerpt: "An exciting travelogue of my memorable 21km Parikrama trip to Vrindavan with my family.",
-                // FIX: Changed quotes to backticks (template literal) to allow multi-line string content.
                 content: `Hey friends, this is Mahender here.
-                 I am going to tell you my experience when I went to Vrindavan. 
-                 Yeah, seven months ago, I went there for worship and 
-                 I was very happy to hear that we were going there.
-                  So my whole family went there with me. 
-                  Let's start from where we got ready.
-                   I am in Rajasthan, Geejgarh.
-                    We packed all the items that we needed, like stove, cylinder, some fruits and gods' photos.
-                     And then we prayed to God for this happy journey. And then we all sat in a jeep and a tempo.
-                      And the happy thing for me was that I sat on the upper side of the tempo and I enjoyed looking at nature's beauty. 
-                      And after some time, the trees hit those who sat on the tempo. We saved ourselves when the trees tried to hit us. 
-                      Now we were getting late and it was 8 pm and we were still in Rajasthan. 
-                      We didn't cross the Rajasthan border yet. And then we got bored, so I started to sing a Radha Rani song like "Radhe Radhe Bol Vrindavan Me Dhol" and "Mukh Se Radhe Radhe Bol".
-                       We sang that one by one and you know, I was very happy because this day would be memorable for me.
-                        And at 12 am, we reached there. First we washed our hands and mouth and then we sat to eat food that we brought from home.
-                         And then we went to worship Govardhan. And then we started the parikrama of 7 kos which is 21 km.
-                          And this was the most enjoyable part for us. Now everyone was walking for the parikrama. 
-                          I was also walking and there were lots of monkeys. And I saw there were many temples on the way of the parikrama. 
-                          We stopped at every temple and gave 1 or 2 rupees in every donation box. And after a few minutes, I bought some chana and gave it to the monkeys.
-                           And everyone looked happy. Now at 5 am, we reached Radha Kund and there we worshipped Radha. 
-                           And then we continued our parikrama. There were lots of kunds there.
-                            And then we completed our parikrama. More story in the next part.`
+I am going to tell you my experience when I went to Vrindavan. 
+Yeah, seven months ago, I went there for worship and 
+I was very happy to hear that we were going there.
+So my whole family went there with me. 
+Let's start from where we got ready.
+I am in Rajasthan, Geejgarh.
+We packed all the items that we needed, like stove, cylinder, some fruits and gods' photos.
+And then we prayed to God for this happy journey. And then we all sat in a jeep and a tempo.
+And the happy thing for me was that I sat on the upper side of the tempo and I enjoyed looking at nature's beauty. 
+And after some time, the trees hit those who sat on the tempo. We saved ourselves when the trees tried to hit us. 
+Now we were getting late and it was 8 pm and we were still in Rajasthan. 
+We didn't cross the Rajasthan border yet. And then we got bored, so I started to sing a Radha Rani song like "Radhe Radhe Bol Vrindavan Me Dhol" and "Mukh Se Radhe Radhe Bol".
+We sang that one by one and you know, I was very happy because this day would be memorable for me.
+And at 12 am, we reached there. First we washed our hands and mouth and then we sat to eat food that we brought from home.
+And then we went to worship Govardhan. And then we started the parikrama of 7 kos which is 21 km.
+And this was the most enjoyable part for us. Now everyone was walking for the parikrama. 
+I was also walking and there were lots of monkeys. And I saw there were many temples on the way of the parikrama. 
+We stopped at every temple and gave 1 or 2 rupees in every donation box. And after a few minutes, I bought some chana and gave it to the monkeys.
+And everyone looked happy. Now at 5 am, we reached Radha Kund and there we worshipped Radha. 
+And then we continued our parikrama. There were lots of kunds there.
+And then we completed our parikrama. More story in the next part.`
             },
+            // --- POST 2 (Village Adventures to Business Focus) ---
             {
                 id: 2,
-                title: "The Art of Making Perfect Pasta",
-                category: "Food",
-                image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80&w=800",
-                excerpt: "Fresh ingredients and simple techniques are all you need for an authentic Italian dinner...",
-                content: "Fresh ingredients and simple techniques are all you need. We explore the history of pasta making, the best flour to use, and how to create the perfect al dente texture every time."
+                title: "From Village Adventures to Business Focus",
+                category: "Study",
+                image: "https://i.postimg.cc/zGzv7pRc/IMG_20231212_WA0036.jpg",
+                excerpt: "A reflection on the shift from childhood rural travel adventures to the serious responsibilities of 10th standard, preparing for business and academic success.",
+                content: `Hi everyone, this is Mahender and I'm here to share my story with you. My favourite pastime is visiting rural areas and enjoying the natural beauty. I have been doing this since I was a child and I still love it.
+
+When I was younger, I used to get very excited whenever my father told me that we were going to the village by train. I liked to see the green fields, the mountains, the rivers and the animals from the train window. Sometimes we also travelled by aeroplane and that was even more thrilling. I felt like I was flying in the sky and seeing the world from a different perspective.
+
+But now things have changed. I am in 10th standard and I have many responsibilities. I have to study hard, do my homework, prepare for exams and think about my future. I don't have much time or interest to go to the village anymore. Now my focus is only on becoming a good student and a successful businessman.
+
+I hope you understand my situation and respect my choices. Thank you for reading my blog post and please leave your comments below.`
             },
+            // --- POST 3 (My First Bicycle) ---
             {
                 id: 3,
-                title: "Understanding The Universe: Black Holes",
-                category: "Science",
-                image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800",
-                excerpt: "A deep dive into the mysteries of space, time dilation, and what lies beyond the event horizon...",
-                content: "A deep dive into the mysteries of space. We look at Stephen Hawking's theories, the recent photography of a black hole, and what it means for our understanding of physics."
+                title: "My First Bicycle: A Childhood Memory",
+                category: "Travel",
+                image: "https://i.postimg.cc/Z51mNLYp/Screenshot_2025_12_03_133428.png",
+                excerpt: "A sentimental story about the first bicycle, racing friends, and the feeling of freedom from childhood.",
+                content: `Hi, my name is Mahender and I want to share with you a story from my childhood. Do you remember the first time you rode a bicycle? I do. It was 10 years ago, when I was 8 years old. I was so curious and excited to learn how to ride a bike that my parents bought me an old one from a garage sale. It was not the fanciest or the newest bike, but it was mine and I loved it.
+
+I used to race with my friends every day after school. We would go to the park or the street and see who could go faster or farther. I was always the winner, because I practiced a lot and had a lot of fun. Riding a bike made me happy and gave me a sense of freedom and adventure. I felt like I could go anywhere and do anything.
+
+But as time passed, my bike got older and rustier. I started to lose interest in riding it. I wanted to try new things and explore new hobbies. I also had more homework and less time to play. So I left my bike in the garage and forgot about it.
+
+Now, I am 18 years old and I have not ridden a bike in years. Sometimes I wonder if I still remember how to do it. Maybe one day I will get a new bike and try again. Maybe I will feel the same joy and thrill that I felt when I was 8 years old. But for now, I will just keep this memory in my heart and share it with you.
+
+Thank you for reading my blog post. Next time, I will tell you more about my life and what I am doing now. Stay tuned!`
             },
+            // --- POST 4 (IIT Aspirations) ---
             {
                 id: 4,
-                title: "Morning Yoga for Beginners",
-                category: "Fitness",
-                image: "https://images.unsplash.com/photo-1544367563-121910aa662f?auto=format&fit=crop&q=80&w=800",
-                excerpt: "Start your day with energy and focus. These 5 simple poses will improve flexibility...",
-                content: "Start your day with energy. Yoga isn't just about flexibility; it's about mindfulness. This routine is designed for complete beginners to do in the comfort of their living room."
+                title: "A Day in My Life and IIT Aspirations",
+                category: "Study",
+                image: "https://i.postimg.cc/mZymJ259/93afjr_Hqmks_Hl2srb8Qlw_ZPc08Zes6e_BM2g_CKy5_p_CY_plaintext_638295284752320315.jpg",
+                excerpt: `A glimpse into my life, from a memorable childhood school incident to the current struggles and focus on preparing for the IIT entrance exam.`,
+                content: `Hello, this is the story of my life. This journey started on 2006, the day I was born. I remember crying and my parents feeling happy to see me. I don't know why it happened, but I was happy too. As I grew up, problems also increased. But that's normal, right? I am from a middle-class family and this is part of my childhood.
+
+One of the incidents that I still remember is when I went to school for an exam. After the exam was over, the teacher held all the students for 10 to 15 minutes because outside the school was very crowded. Me and my friends started to beat the table loudly and suddenly the teacher came and took us out of the classroom. She told us to stand like cocks in a gallery. At that time, some small children left for home and everyone was laughing to see us. I felt like I had to take a transfer certificate from the school and leave from there, but it was not possible. After some time, the teacher let me go and told me not to do that again. But she did not release my other friends and they had to wait until all the children went home. Then we laughed at each other and went home. This is a short part of my life.
+
+As I got older, more incidents happened with me. And now today is 14 Feb 2023 and time is 11 am. In my childhood, I did not feel many problems because my parents solved all my problems for me. But now they also solve my problems, but some things they cannot do for me. My parents gave me all the resources that I needed. I started preparing for IIT four months ago, but today I feel like I have not studied anything and everything is gone from my hand.
+
+This is my blog post about my life so far. I hope you enjoyed reading it and learned something from it. Thank you for your time and attention.
+
+This story was written on 14 Feb 2023 at 11 am.`
             },
-            // Generating the remaining 16 placeholder posts programmatically 
-            // so you have 20 boxes as requested.
-            // You can replace these with real data manually.
-        ];
 
-        // Helper function to generate 16 more dummy posts for the demo
-        const categories = ["Travel", "Food", "Science", "Fitness", "Music", "Movies", "Nature", "Gaming", "Politics", "International Affairs", "Study"];
-        const dummyImages = [
-            "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800", // Music
-            "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800", // Nature
-            "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800", // Movies
-            "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800"  // Gaming
-        ];
+            // --- POST 5 (Dausa Bus Stop) ---
+            {
+                id: 5,
+                title: "The Dream of the Dausa Bus Stop (A Short Story)",
+                category: "Travel",
+                image: "https://i.postimg.cc/26HLrJmn/IMG20251025110247.jpg",
+                excerpt: "A short, spooky story written in 2022 about an unnerving night experience at a bus stop in Dausa, Rajasthan, which turns out to be a strange dream.",
+                content: `Hello, this is Mahender here. I want to share a story with you that I wrote on 6/10/2022. Let's begin the story.
 
-        for (let i = 5; i <= 20; i++) {
-            const randomCat = categories[Math.floor(Math.random() * categories.length)];
-            const randomImg = dummyImages[Math.floor(Math.random() * dummyImages.length)];
-            
-            blogData.push({
-                id: i,
-                title: `Amazing ${randomCat} Story #${i}`,
-                category: randomCat,
-                image: randomImg,
-                excerpt: `This is a placeholder summary about ${randomCat}. It simulates the space where your intro text will go.`,
-                content: `This is the full content for a post about ${randomCat}. When you edit the code, you will replace this text with your actual article content. You can write as much as you want here about any topic.`
-            });
-        }
+This is the story of Dausa, a town in Rajasthan. One day, I went to visit my grandmother's home in Dausa. That was a night when different incidents happened to me. It was the time when everyone was sleeping and spirits were around us. I went to my uncle's house before going to my grandmother's home, because there was a pond in the way to my grandmother's home. After 7 pm, I left my uncle's house to go to my grandmother's house. So I was waiting at the bus stop for an hour, but there was no bus, rickshaw or anyone else with me. Suddenly, I heard a horn and a light flashed on my face. I couldn't see clearly. He stopped his bike in front of me and I was very scared to see him. After some time, he told me not to wait for the bus or rickshaw, because no one would come at that time. He told me to sit with him and go to his home. But I was scared, so I didn't go with him. He left from there and came back again. He told me to go to his home until morning and then I could leave. I had no other choice, so I was very scared but I sat with him and went to his home. In a few minutes, we reached his home and he knocked on his door. A lady came out with a knife. I was very scared. He told her that the food was ready. I was very scared. She looked like she wanted to eat me. And then we ate the food. Then he gave me a blanket and I slept with it. When morning came, I saw that I was at the bus stop. So I realized that it was a dream. This is the story of what happened to me at the bus stop. I hope you liked it.`
+            },
+            // --- POST 6 (Learning Mindset) ---
+            {
+                id: 6,
+                title: "How to Develop a Learning Mindset?",
+                category: "Study",
+                image: "https://i.postimg.cc/q7VY7j09/Screenshot_2025_12_03_140524.png",
+                excerpt: "Discover how to shift from a competitive focus to a learning mindset, embracing challenges for growth and starting your day with clear intention and purpose.",
+                content: `Many people have a competitive mindset and they only want to try to win. They don't try to learn something new and they miss out on the opportunities for growth and development. In life, everything is not about winning. Therefore, we should learn from the situations where we face challenges and problems, not from the ones where everything is easy and comfortable. 
+
+One way to cultivate a learning mindset is to get up in the form every morning. This means that we should start our day with a clear intention, a positive attitude and a willingness to learn. We should not just get up in the morning without any purpose or direction. Getting up in the form helps us to focus on our goals, to overcome obstacles and to improve ourselves.`
+            },
+            // --- POST 7 (Geejgarh Fort Adventure) - Image Updated ---
+            {
+                id: 7,
+                title: "Geejgarh Fort Adventure (2022)",
+                category: "Travel",
+                image: "https://i.postimg.cc/m2T7T903/IMG_20250421_WA0054.jpg",
+                excerpt: "A short story from 2022 detailing a visit to the historic Geejgarh Fort in the village, enjoying the peaceful views and the temple of Lord Shiva.",
+                content: `Hello everyone! Today I visited my village and decided to go to the fort. It is known as Geejgarh Fort and it has a lot of history and beauty. I started climbing the fort and enjoyed the amazing view from there. I could see the green fields, the blue sky and the distant mountains. I felt like I was in a different world.
+
+When I reached the top of the fort, I found a flat surface where I sat down and relaxed. I felt like all my problems were blown away by the cool breeze. I felt like a king on the fort, surrounded by nature and peace. There was a temple of Lord Shiva and many monkeys who were playing and fighting with each other. There was also a tap where parrots and other birds came to drink water. It was a lovely sight to watch.
+
+This is a small story about my experience on Geejgarh Fort. It was a place where I forgot all my worries and remembered only myself and the view of my village. I hope you enjoyed reading it and maybe you will visit it someday too.`
+            },
+            // --- POST 8 (Hindi Poem: Galti) ---
+            {
+                id: 8,
+                title: "गलती (Mistake)",
+                category: "Thoughts",
+                image: "https://i.postimg.cc/HsK5XNJm/IMG20251025171837.jpg",
+                excerpt: "एक आत्म-चिंतन कविता, जो गलतियों को क्षमा करने, लेकिन टूटे हुए विश्वास को फिर से जोड़ने की मानसिक कश्मकश को दर्शाती है।",
+                content: `1. गलती
+
+के भूल जाऊँगा तेरी हर गलती  
+हर पाप, हर अपराध क्षमा है  
+लेकिन दिल को कैसे मैं समझाऊँगा  
+उसी मोड़ से शुरुआत के लिए कैसे मनाऊँगा  
+कैसे जोड़ूँगा मैं अपने दिल को  
+दिल तो दिल मन को कैसे मैं मनाऊँगा  
+कैसे फिर मन को झूठी आशाओं से समझाऊँगा  
+और मन मान भी गया, तो दिमाग पूछ ही लेगा इसका प्रमाण क्या  
+कि आशाएँ अब निराशा में नहीं बदलेंगी  
+जैसे ये पहले बदल गई अब नहीं बदलेंगी`
+            },
+            // --- POST 9 (Hindi Poem: Khushiyan) - Image Updated ---
+            {
+                id: 9,
+                title: "खुशियाँ (Joys)",
+                category: "Thoughts",
+                image: "https://i.postimg.cc/T1vkQPND/74cf6865_ce0a_459f_b76a_434adfb17a0f.jpg",
+                excerpt: "बचपन की प्यारी यादों और माता-पिता के निस्वार्थ प्यार को दर्शाती एक मार्मिक कविता।",
+                content: `खुशियाँ
+
+जीवन में इतनी कठिनाई है,  
+फिर भी इसी में खुशियाँ पाई हैं।  
+बचपन में घुटने-घुटने जाता था,  
+और झट से पापा की गोदी में चढ़ जाता था।  
+माँ दूध पिलाने आती थी, मैं पापा के पीछे छिप जाता था।  
+जब मैं खटिया से गिर जाता था,  
+मंद-मंद मुस्कुराता था।  
+उसमें भी माँ रो-रोकर अपनी आँख सुजा लिया करती थी।  
+दो मिनट न दिखा तो पूरा मोहल्ले को जगा दिया करती थी।  
+जीवन में इतनी कठिनाई है, फिर भी इसी में खुशियाँ पाई हैं।`
+            },
+            // --- NEW POST 10 (मन का द्वंद्व) ---
+            {
+                id: 10,
+                title: "मन का द्वंद्व",
+                category: "Thoughts",
+                image: "https://i.postimg.cc/DynhwffW/IMG_20250526_WA0024.jpg",
+                excerpt: "आज कुछ मन उदास है, दिल की हर धड़कन उदास है। मन और शरीर के बीच की कश्मकश को दर्शाती एक कविता।",
+                content: `आज कुछ मन उदास है,  
+दिल की हर धड़कन उदास है।  
+न जाने क्यों बांधा है इन बेड़ियों में खुद को मैंने,  
+दिल मचल रहा है जमाने में मचाने के लिए,  
+लेकिन शरीर ने बांधा है खुद को जमाने में न भटकने के लिए।  
+मन कहता है तोड़ दे सारी बेड़ियाँ,  
+दिमाग कहता है पढ़ ले थोड़ा और ज़रा। और फिर आत्मा कहती है चला जा जी ले ज़िंदगी,  
+लेकिन एक बात और सुन ले, चला गया तो आ नहीं पाएगा।  
+और मान ले वापस उस स्थिति में आ भी गया,  
+तो तू भी फिर खुद को पहचान नहीं पाएगा।`
+            }
+            // Posts 11 through 20 have been removed as requested.
+        ];
 
         // --- RENDER LOGIC ---
         const blogGrid = document.getElementById('blogGrid');
@@ -468,7 +560,7 @@
                 card.className = 'card';
                 card.innerHTML = `
                     <div class="thumbnail-area">
-                        <img src="${post.image}" alt="${post.title}" loading="lazy">
+                        <img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1e293b/f1f5f9?text=Image+Placeholder'" loading="lazy">
                     </div>
                     <div class="card-content">
                         <span class="badge">${post.category}</span>
@@ -510,9 +602,10 @@
 
             modalTitle.textContent = post.title;
             modalImage.src = post.image;
+            modalImage.onerror = () => modalImage.src = 'https://placehold.co/800x300/1e293b/f1f5f9?text=Image+Not+Found'; // Fallback
             modalCategory.textContent = post.category;
-            // Note: innerHTML is generally safer for content from a trusted source like this JS array.
-            // Using innerHTML here to respect the original multi-line formatting from the template literal.
+            // Using innerHTML here to respect the multi-line formatting from template literals
+            // and replace newlines with <br> for proper display in the modal
             modalBody.innerHTML = post.content.replace(/\n/g, '<br>');
 
             modal.classList.add('active');
