@@ -8,14 +8,15 @@
         /* --- CSS VARIABLES & RESET --- */
         :root {
             --bg-body: #0f172a;
+            --bg-header: #1e293b; 
             --bg-card: #1e293b;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
             --accent: #38bdf8;
             --accent-hover: #0ea5e9;
             --border: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            --font-main: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
@@ -30,73 +31,70 @@
             font-family: var(--font-main);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden; 
         }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- HEADER & NAVIGATION (NOW SCROLLABLE) --- */
         header {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--accent); 
+            padding: 1.5rem 1rem; 
+            /* ADJUSTMENT: Removed sticky positioning to allow it to scroll away */
+            position: static; 
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column; 
+            align-items: flex-start;
             gap: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem; 
             font-weight: 800;
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 0.5rem;
         }
 
         .controls {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
+            width: 100%;
+            flex-direction: column;
         }
 
-        input[type="text"] {
+        input[type="text"], select {
             background: var(--bg-card);
             border: 1px solid var(--border);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
             outline: none;
             transition: 0.3s;
+            width: 100%;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        input[type="text"]:focus {
+        input[type="text"]:focus, select:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
         }
-
-        select {
-            background: var(--bg-card);
-            color: white;
-            border: 1px solid var(--border);
-            padding: 0.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
+        
         /* --- GRID LAYOUT --- */
         .container {
             max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            margin: 2.5rem auto; 
+            padding: 0 1rem;
         }
 
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         /* --- BLOG CARD DESIGN --- */
@@ -109,16 +107,22 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            box-shadow: var(--shadow);
         }
 
+        .card:active {
+            transform: translateY(-2px); 
+        }
+        
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7); 
             border-color: var(--accent);
         }
 
         .thumbnail-area {
-            height: 200px;
+            /* Mobile/Default: Denser view */
+            height: 170px; 
             width: 100%;
             background-color: #2d3748;
             position: relative;
@@ -137,7 +141,8 @@
         }
 
         .card-content {
-            padding: 1.5rem;
+            /* Mobile/Default: Reduced padding for a smaller card footprint */
+            padding: 1rem; 
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -147,17 +152,18 @@
             display: inline-block;
             background: rgba(56, 189, 248, 0.15);
             color: var(--accent);
-            padding: 0.25rem 0.75rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
             width: fit-content;
         }
 
         .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             color: #fff;
         }
 
@@ -167,28 +173,30 @@
             margin-bottom: 1.5rem;
             flex-grow: 1;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 4; 
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
         .read-more-btn {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            background: var(--accent);
+            border: none;
+            color: var(--bg-header);
+            padding: 0.75rem 1.2rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
             text-align: center;
             text-decoration: none;
-            align-self: flex-start;
+            align-self: stretch; 
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(56, 189, 248, 0.3);
         }
 
         .read-more-btn:hover {
-            background: var(--accent);
-            color: #fff;
+            background: var(--accent-hover);
+            transform: scale(1.02);
         }
 
         /* --- MODAL (POPUP) STYLES --- */
@@ -198,7 +206,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -206,7 +214,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
 
         .modal-overlay.active {
@@ -216,43 +224,48 @@
 
         .modal-content {
             background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
+            padding: 1.5rem;
+            border-radius: 0; 
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
             overflow-y: auto;
             position: relative;
-            border: 1px solid var(--border);
+            border: none;
+        }
+        
+        #modalBody {
+            color: var(--text-muted);
+            /* Retained: Increased line-height for better readability */
+            line-height: 2.0; 
         }
 
         .close-modal {
-            position: absolute;
+            position: fixed; 
             top: 1rem;
-            right: 1.5rem;
-            font-size: 2rem;
+            right: 1rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            color: var(--text-muted);
-            transition: color 0.2s;
+            color: var(--accent);
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 50%;
+            padding: 0 0.5rem;
+            height: 48px;
+            width: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-shadow: var(--shadow);
+            z-index: 1001;
         }
-
-        .close-modal:hover {
-            color: white;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
+        
         /* --- FOOTER STYLES --- */
         footer {
-            background: rgba(15, 23, 42, 0.95);
+            background: var(--bg-header);
             border-top: 1px solid var(--border);
-            padding: 4rem 2rem;
+            padding: 4rem 1rem;
             margin-top: 4rem;
             text-align: center;
         }
@@ -265,40 +278,77 @@
             align-items: center;
             gap: 1.5rem;
         }
-
+        
         .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
             object-fit: cover;
             border: 3px solid var(--accent);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
-
-        .about-text h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .about-text p {
-            color: var(--text-muted);
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
+        
+        /* --- DESKTOP BREAKPOINT --- */
+        @media (min-width: 768px) {
             header {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row; 
+                align-items: center;
+                padding: 1.5rem 3rem;
             }
             
+            .logo {
+                text-align: left;
+                width: auto;
+            }
+
             .controls {
-                width: 100%;
-                flex-direction: column;
+                flex-direction: row; 
+                width: auto;
+                align-items: center;
+            }
+
+            input[type="text"], select {
+                width: 200px;
             }
             
-            input, select {
-                width: 100%;
+            .blog-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem; 
+            }
+
+            .read-more-btn {
+                align-self: flex-start; 
+                width: auto;
+            }
+
+            .modal-content {
+                max-width: 800px;
+                width: 90%;
+                max-height: 90vh;
+                border-radius: 12px;
+                height: auto;
+            }
+
+            .close-modal {
+                position: absolute;
+                top: 1rem;
+                right: 1.5rem;
+                font-size: 2rem;
+                height: auto;
+                width: auto;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+            }
+            
+            .thumbnail-area {
+                /* Desktop: slightly taller image for better balance */
+                height: 220px; 
+            }
+            
+            .card-content {
+                /* Desktop: restore original, larger padding */
+                padding: 1.5rem; 
             }
         }
     </style>
@@ -336,7 +386,7 @@
     <!-- Footer Section -->
     <footer>
         <div class="footer-content">
-            <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img">
+            <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/38bdf8/0f172a?text=M';">
             <div class="about-text">
                 <h3>About Mahender</h3>
                 <p>Welcome to my personal blog space! I am passionate about a wide range of topics, including **Travel, Politics, International Affairs, and Study**, alongside my interests in Technology, Food, Science, Fitness, and Music. Here, I share my thoughts and experiences to help others learn and grow. Thanks for visiting!</p>
@@ -352,7 +402,7 @@
             <img src="" alt="" class="modal-image" id="modalImage">
             <div class="badge" id="modalCategory">Category</div>
             <h2 id="modalTitle" style="margin-bottom: 1rem; color: white;">Title</h2>
-            <div id="modalBody" style="color: var(--text-muted); line-height: 1.8;">
+            <div id="modalBody"> 
                 <!-- Full text goes here -->
             </div>
         </div>
@@ -360,9 +410,7 @@
 
     <script>
         // ==========================================
-        // HOW TO UPLOAD YOUR BLOGS VIA CODE
-        // ==========================================
-        // All posts are now explicitly defined below for easy editing.
+        // BLOG POST DATA
         // ==========================================
 
         const blogData = [
@@ -441,7 +489,7 @@ One of the incidents that I still remember is when I went to school for an exam.
 
 As I got older, more incidents happened with me. And now today is 14 Feb 2023 and time is 11 am. In my childhood, I did not feel many problems because my parents solved all my problems for me. But now they also solve my problems, but some things they cannot do for me. My parents gave me all the resources that I needed. I started preparing for IIT four months ago, but today I feel like I have not studied anything and everything is gone from my hand.
 
-This is my blog post about my life so far. I hope you enjoyed reading it and learned something from it. Thank you for your time and attention.
+This is my blog post about my life so far. I hope you enjoyed reading it and learned something from it. Thank time and attention.
 
 This story was written on 14 Feb 2023 at 11 am.`
             },
@@ -539,7 +587,6 @@ This is a small story about my experience on Geejgarh Fort. It was a place where
 और मान ले वापस उस स्थिति में आ भी गया,  
 तो तू भी फिर खुद को पहचान नहीं पाएगा।`
             }
-            // Posts 11 through 20 have been removed as requested.
         ];
 
         // --- RENDER LOGIC ---
@@ -551,7 +598,7 @@ This is a small story about my experience on Geejgarh Fort. It was a place where
             blogGrid.innerHTML = ''; // Clear current grid
 
             if (posts.length === 0) {
-                blogGrid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1/-1; text-align:center;">No posts found.</p>';
+                blogGrid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1/-1; text-align:center; padding: 2rem;">No posts found matching your criteria.</p>';
                 return;
             }
 
@@ -604,9 +651,9 @@ This is a small story about my experience on Geejgarh Fort. It was a place where
             modalImage.src = post.image;
             modalImage.onerror = () => modalImage.src = 'https://placehold.co/800x300/1e293b/f1f5f9?text=Image+Not+Found'; // Fallback
             modalCategory.textContent = post.category;
-            // Using innerHTML here to respect the multi-line formatting from template literals
-            // and replace newlines with <br> for proper display in the modal
-            modalBody.innerHTML = post.content.replace(/\n/g, '<br>');
+            
+            // Using innerHTML here to respect the multi-line formatting and ensuring a bottom scroll space
+            modalBody.innerHTML = `<div style="padding-bottom: 3rem;">${post.content.replace(/\n/g, '<br>')}</div>`;
 
             modal.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -617,7 +664,7 @@ This is a small story about my experience on Geejgarh Fort. It was a place where
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal if clicking outside the content box
+        // Close modal if clicking outside the content box (for desktop, on mobile it's full screen)
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
         });
