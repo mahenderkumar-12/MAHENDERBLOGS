@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahender Blogs</title>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
@@ -16,7 +18,7 @@
             --accent-hover: #0ea5e9;
             --border: #334155;
             --shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            --font-main: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-main: 'Inter', sans-serif;
         }
 
         * {
@@ -34,28 +36,54 @@
             overflow-x: hidden; 
         }
 
-        /* --- HEADER & NAVIGATION (SCROLLABLE) --- */
+        /* --- HEADER & NAVIGATION (IMPROVED) --- */
         header {
             background: var(--bg-header);
-            border-bottom: 2px solid var(--accent); 
+            border-bottom: 3px solid var(--accent); 
             padding: 1.5rem 1rem; 
-            position: static; 
             display: flex;
             flex-direction: column; 
-            align-items: flex-start;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        .header-main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 1rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        .profile-img-header {
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.7);
+        }
+
+        .branding {
+            text-align: center;
         }
 
         .logo {
-            font-size: 1.8rem; 
-            font-weight: 800;
+            font-size: 2rem; 
+            font-weight: 900;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.25rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .tagline {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .controls {
@@ -68,7 +96,7 @@
         input[type="text"], select {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            color: white;
+            color: var(--text-main);
             padding: 0.8rem 1rem;
             border-radius: 8px;
             outline: none;
@@ -76,11 +104,12 @@
             width: 100%;
             font-size: 1rem;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            appearance: none; /* For better consistency across browsers */
         }
 
         input[type="text"]:focus, select:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.4);
         }
         
         /* --- GRID LAYOUT --- */
@@ -90,29 +119,34 @@
             padding: 0 1rem;
         }
 
-        /* NEW CSS for Centering the Grid */
+        /* Center the grid within the container */
         .blog-grid-wrapper {
             display: flex;
-            justify-content: center; /* Center the grid within the container */
+            justify-content: center; 
         }
 
         .blog-grid {
-            /* Restrict max width of the grid itself if needed, otherwise use grid for column layout */
             display: grid;
+            /* Adaptive column layout */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            /* Added max-width to the grid for proper centering on smaller devices/low card count */
             max-width: 100%; 
+            width: 100%;
         }
         
-        /* If only one column is displayed (like on mobile), center the content */
+        /* Single column on narrow screens, and constrain width for centering */
         @media (max-width: 600px) {
             .blog-grid {
-                grid-template-columns: 1fr; /* Single column on narrow screens */
-                max-width: 320px; /* Optional: Constrain max width for better card readability on very large phones */
+                grid-template-columns: 1fr;
+                /* Limit grid width on mobile to ensure it centers nicely 
+                   if there are fewer columns than expected */
+                max-width: 320px; 
+            }
+            .container {
+                padding: 0 0.5rem;
             }
         }
-        /* --- END NEW CSS --- */
+        /* --- END GRID LAYOUT --- */
 
 
         /* --- BLOG CARD DESIGN --- */
@@ -126,6 +160,7 @@
             flex-direction: column;
             height: 100%;
             box-shadow: var(--shadow);
+            cursor: pointer;
         }
 
         .card:active {
@@ -139,7 +174,6 @@
         }
 
         .thumbnail-area {
-            /* Mobile/Default: Denser view */
             height: 170px; 
             width: 100%;
             background-color: #2d3748;
@@ -159,7 +193,6 @@
         }
 
         .card-content {
-            /* Mobile/Default: Reduced padding for a smaller card footprint */
             padding: 1rem; 
             display: flex;
             flex-direction: column;
@@ -253,9 +286,23 @@
             border: none;
         }
         
+        /* FIX: Ensure modal image scales down correctly on mobile */
+        .modal-content img.modal-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: block;
+            object-fit: cover;
+            /* Set a maximum height for consistency on smaller screens */
+            max-height: 250px; 
+            width: 100%; /* Ensure it fills the modal width */
+        }
+        
         #modalBody {
             color: var(--text-muted);
             line-height: 2.0; 
+            font-size: 1rem;
         }
 
         .close-modal {
@@ -276,9 +323,15 @@
             line-height: 1;
             box-shadow: var(--shadow);
             z-index: 1001;
+            transition: background 0.2s;
         }
         
-        /* --- FOOTER STYLES --- */
+        .close-modal:hover {
+            background: var(--accent-hover);
+            color: var(--bg-header);
+        }
+        
+        /* --- FOOTER STYLES (Kept consistent with new header look) --- */
         footer {
             background: var(--bg-header);
             border-top: 1px solid var(--border);
@@ -309,13 +362,24 @@
         @media (min-width: 768px) {
             header {
                 flex-direction: row; 
+                justify-content: space-between;
                 align-items: center;
-                padding: 1.5rem 3rem;
+                padding: 2rem 3rem;
             }
             
-            .logo {
-                text-align: left;
+            .header-main-content {
+                flex-direction: row;
+                align-items: center;
                 width: auto;
+            }
+
+            .logo {
+                font-size: 1.5rem; 
+                text-align: left;
+            }
+            
+            .tagline {
+                text-align: left;
             }
 
             .controls {
@@ -325,14 +389,12 @@
             }
 
             input[type="text"], select {
-                width: 200px;
+                width: 220px;
             }
             
             .blog-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
                 gap: 2rem; 
-                /* Max width removed here as the parent wrapper handles centering */
-                max-width: 100%;
             }
 
             .read-more-btn {
@@ -346,11 +408,17 @@
                 max-height: 90vh;
                 border-radius: 12px;
                 height: auto;
+                padding: 2rem;
+            }
+
+            .modal-content img.modal-image {
+                /* PC: Allow image to be taller, remove max-height constraint */
+                max-height: 400px; 
             }
 
             .close-modal {
                 position: absolute;
-                top: 1rem;
+                top: 1.5rem;
                 right: 1.5rem;
                 font-size: 2rem;
                 height: auto;
@@ -358,15 +426,14 @@
                 background: transparent;
                 padding: 0;
                 box-shadow: none;
+                color: var(--text-main);
             }
             
             .thumbnail-area {
-                /* Desktop: slightly taller image for better balance */
                 height: 220px; 
             }
             
             .card-content {
-                /* Desktop: restore original, larger padding */
                 padding: 1.5rem; 
             }
         }
@@ -374,9 +441,16 @@
 </head>
 <body>
 
-    <!-- Header with Search and Filter -->
+    <!-- Header with Profile Image, Branding, Search and Filter -->
     <header>
-        <div class="logo">MAHENDER BLOGS</div>
+        <div class="header-main-content">
+            <!-- Profile image from footer used here -->
+            <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img-header" onerror="this.onerror=null;this.src='https://placehold.co/80x80/38bdf8/0f172a?text=M';">
+            <div class="branding">
+                <div class="logo">MAHENDER BLOGS</div>
+                <p class="tagline">Exploring Travel, Thoughts, and Technology</p>
+            </div>
+        </div>
         <div class="controls">
             <select id="categoryFilter" onchange="filterPosts()">
                 <option value="all">All Topics</option>
@@ -397,7 +471,7 @@
 
     <!-- Main Grid Container -->
     <div class="container">
-        <!-- New wrapper added for centering the grid -->
+        <!-- Wrapper for centering the grid -->
         <div class="blog-grid-wrapper">
             <div class="blog-grid" id="blogGrid">
                 <!-- Blog cards will be injected here by JavaScript -->
@@ -408,6 +482,7 @@
     <!-- Footer Section -->
     <footer>
         <div class="footer-content">
+            <!-- Profile image used in footer -->
             <img src="https://i.postimg.cc/vZz6mpHY/IMG20230408101248.jpg" alt="Mahender" class="profile-img" onerror="this.onerror=null;this.src='https://placehold.co/100x100/38bdf8/0f172a?text=M';">
             <div class="about-text">
                 <h3>About Mahender</h3>
@@ -421,6 +496,7 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
+            <!-- Image now has the class modal-image to handle responsiveness -->
             <img src="" alt="" class="modal-image" id="modalImage">
             <div class="badge" id="modalCategory">Category</div>
             <h2 id="modalTitle" style="margin-bottom: 1rem; color: white;">Title</h2>
@@ -627,6 +703,8 @@ This is a small story about my experience on Geejgarh Fort. It was a place where
             posts.forEach(post => {
                 const card = document.createElement('article');
                 card.className = 'card';
+                // Using the card click to open the modal for better mobile UX
+                card.onclick = () => openModal(post.id); 
                 card.innerHTML = `
                     <div class="thumbnail-area">
                         <img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='https://placehold.co/800x600/1e293b/f1f5f9?text=Image+Placeholder'" loading="lazy">
@@ -635,7 +713,8 @@ This is a small story about my experience on Geejgarh Fort. It was a place where
                         <span class="badge">${post.category}</span>
                         <h3 class="card-title">${post.title}</h3>
                         <p class="card-excerpt">${post.excerpt}</p>
-                        <button class="read-more-btn" onclick="openModal(${post.id})">Read Article</button>
+                        <!-- Button remains, but card click is primary action -->
+                        <button class="read-more-btn" onclick="openModal(${post.id}); event.stopPropagation();">Read Article</button>
                     </div>
                 `;
                 blogGrid.appendChild(card);
