@@ -34,12 +34,11 @@
             overflow-x: hidden; 
         }
 
-        /* --- HEADER & NAVIGATION (NOW SCROLLABLE) --- */
+        /* --- HEADER & NAVIGATION (SCROLLABLE) --- */
         header {
             background: var(--bg-header);
             border-bottom: 2px solid var(--accent); 
             padding: 1.5rem 1rem; 
-            /* ADJUSTMENT: Removed sticky positioning to allow it to scroll away */
             position: static; 
             display: flex;
             flex-direction: column; 
@@ -91,11 +90,30 @@
             padding: 0 1rem;
         }
 
+        /* NEW CSS for Centering the Grid */
+        .blog-grid-wrapper {
+            display: flex;
+            justify-content: center; /* Center the grid within the container */
+        }
+
         .blog-grid {
+            /* Restrict max width of the grid itself if needed, otherwise use grid for column layout */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
+            /* Added max-width to the grid for proper centering on smaller devices/low card count */
+            max-width: 100%; 
         }
+        
+        /* If only one column is displayed (like on mobile), center the content */
+        @media (max-width: 600px) {
+            .blog-grid {
+                grid-template-columns: 1fr; /* Single column on narrow screens */
+                max-width: 320px; /* Optional: Constrain max width for better card readability on very large phones */
+            }
+        }
+        /* --- END NEW CSS --- */
+
 
         /* --- BLOG CARD DESIGN --- */
         .card {
@@ -237,7 +255,6 @@
         
         #modalBody {
             color: var(--text-muted);
-            /* Retained: Increased line-height for better readability */
             line-height: 2.0; 
         }
 
@@ -314,6 +331,8 @@
             .blog-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                 gap: 2rem; 
+                /* Max width removed here as the parent wrapper handles centering */
+                max-width: 100%;
             }
 
             .read-more-btn {
@@ -378,8 +397,11 @@
 
     <!-- Main Grid Container -->
     <div class="container">
-        <div class="blog-grid" id="blogGrid">
-            <!-- Blog cards will be injected here by JavaScript -->
+        <!-- New wrapper added for centering the grid -->
+        <div class="blog-grid-wrapper">
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog cards will be injected here by JavaScript -->
+            </div>
         </div>
     </div>
 
